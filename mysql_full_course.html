@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL Full Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+        .section { display: none; }
+        .section.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-600 p-2 rounded-lg">
+                    <i class="ti ti-database text-white text-xl"></i>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight">MySQL <span class="text-indigo-600">Full Course</span></h1>
+            </div>
+            <div class="text-sm text-slate-500 font-medium hidden sm:block">
+                Master the art of Relational Databases
+            </div>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white border-r border-slate-200 overflow-y-auto hidden md:block">
+            <div class="p-4">
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 px-3">Course Content</p>
+                <nav class="space-y-1">
+                    <div class="nav-item active group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('intro',this)">
+                        <i class="ti ti-info-circle text-lg"></i>
+                        <span class="text-sm font-medium">Introduction</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('databases',this)">
+                        <i class="ti ti-server text-lg"></i>
+                        <span class="text-sm font-medium">Databases</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('tables',this)">
+                        <i class="ti ti-table text-lg"></i>
+                        <span class="text-sm font-medium">Tables</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('datatypes',this)">
+                        <i class="ti ti-list text-lg"></i>
+                        <span class="text-sm font-medium">Data Types</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('crud',this)">
+                        <i class="ti ti-pencil text-lg"></i>
+                        <span class="text-sm font-medium">CRUD</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('select',this)">
+                        <i class="ti ti-search text-lg"></i>
+                        <span class="text-sm font-medium">SELECT & Filter</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('joins',this)">
+                        <i class="ti ti-git-merge text-lg"></i>
+                        <span class="text-sm font-medium">JOINs</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('aggregate',this)">
+                        <i class="ti ti-math text-lg"></i>
+                        <span class="text-sm font-medium">Aggregates</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('indexes',this)">
+                        <i class="ti ti-bolt text-lg"></i>
+                        <span class="text-sm font-medium">Indexes</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('constraints',this)">
+                        <i class="ti ti-lock text-lg"></i>
+                        <span class="text-sm font-medium">Constraints</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('subquery',this)">
+                        <i class="ti ti-code text-lg"></i>
+                        <span class="text-sm font-medium">Subqueries</span>
+                    </div>
+                    <div class="nav-item group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-indigo-600" onclick="show('advanced',this)">
+                        <i class="ti ti-sparkles text-lg"></i>
+                        <span class="text-sm font-medium">Advanced</span>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="flex-1 overflow-y-auto bg-slate-50 p-4 md:p-8">
+            <div class="max-w-4xl mx-auto">
+
+                <!-- Intro Section -->
+                <div id="intro" class="section active space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">What is MySQL?</h2>
+                        <p class="text-slate-500 text-lg">A powerful open-source relational database management system (RDBMS)</p>
+                    </div>
+
+                    <div class="grid gap-4">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-colors">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i class="ti ti-info-circle text-indigo-600 text-xl"></i>
+                                <h3 class="font-semibold text-slate-800">What it does</h3>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed">MySQL stores data in tables (like spreadsheets), lets you retrieve/modify it with SQL, and handles millions of records reliably. Used by Facebook, Twitter, YouTube, and WordPress.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-colors">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i class="ti ti-hierarchy text-indigo-600 text-xl"></i>
+                                <h3 class="font-semibold text-slate-800">Structure: Database &rarr; Table &rarr; Row</h3>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed">A <strong class="text-indigo-600">database</strong> holds many <strong class="text-indigo-600">tables</strong>. Each table has <strong class="text-indigo-600">columns</strong> (fields) and <strong class="text-indigo-600">rows</strong> (records). Think: a folder full of spreadsheets.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-colors">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i class="ti ti-terminal text-indigo-600 text-xl"></i>
+                                <h3 class="font-semibold text-slate-800">SQL — the language</h3>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed">SQL (Structured Query Language) is how you talk to MySQL. It has 4 core operations:
+                                <code class="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 font-mono text-sm">SELECT</code>,
+                                <code class="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 font-mono text-sm">INSERT</code>,
+                                <code class="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 font-mono text-sm">UPDATE</code>,
+                                <code class="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 font-mono text-sm">DELETE</code>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-4">
+                        <button class="px-6 py-2.5 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-all shadow-md hover:shadow-indigo-200 flex items-center gap-2" onclick="sendPrompt('Teach me more about how MySQL compares to other databases like PostgreSQL and SQLite')">
+                            Compare MySQL vs other DBs <i class="ti ti-arrow-up-right text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Databases Section -->
+                <div id="databases" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">Working with Databases</h2>
+                        <p class="text-slate-500 text-lg">Creating, selecting, and managing databases</p>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl">
+                        <div class="flex items-center justify-between px-4 py-2 bg-slate-800 border-b border-slate-700">
+                            <span class="text-xs font-mono text-slate-400">mysql_query.sql</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                        </div>
+                        <pre class="p-6 font-mono text-sm leading-relaxed overflow-x-auto text-slate-300">
+<span class="text-slate-500 italic">-- Create a new database</span>
+<span class="text-blue-400 font-semibold">CREATE DATABASE</span> <span class="text-cyan-300">school</span>;
+
+<span class="text-slate-500 italic">-- Use/select a database to work in</span>
+<span class="text-blue-400 font-semibold">USE</span> <span class="text-cyan-300">school</span>;
+
+<span class="text-slate-500 italic">-- List all databases</span>
+<span class="text-blue-400 font-semibold">SHOW DATABASES</span>;
+
+<span class="text-slate-500 italic">-- Delete a database (careful!)</span>
+<span class="text-blue-400 font-semibold">DROP DATABASE</span> <span class="text-cyan-300">school</span>;
+
+<span class="text-slate-500 italic">-- Create only if it doesn't exist</span>
+<span class="text-blue-400 font-semibold">CREATE DATABASE IF NOT EXISTS</span> <span class="text-cyan-300">school</span>;</pre>
+                    </div>
+                    <div class="pt-4">
+                        <button class="px-6 py-2.5 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-all shadow-md hover:shadow-indigo-200 flex items-center gap-2" onclick="sendPrompt('Give me practice exercises for creating and managing MySQL databases')">
+                            Practice exercises <i class="ti ti-arrow-up-right text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tables Section -->
+                <div id="tables" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">Tables</h2>
+                        <p class="text-slate-500 text-lg">Define the structure of your data</p>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl">
+                        <div class="px-6 py-4">
+                            <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-blue-400 font-semibold">CREATE TABLE</span> <span class="text-cyan-300">students</span> (
+  id      <span class="text-purple-400">INT</span> <span class="text-blue-400 font-semibold">AUTO_INCREMENT PRIMARY KEY</span>,
+  name    <span class="text-purple-400">VARCHAR</span>(<span class="text-orange-300">100</span>) <span class="text-blue-400 font-semibold">NOT NULL</span>,
+  email   <span class="text-purple-400">VARCHAR</span>(<span class="text-orange-300">150</span>) <span class="text-blue-400 font-semibold">UNIQUE</span>,
+  age     <span class="text-purple-400">INT</span>,
+  grade   <span class="text-purple-400">CHAR</span>(<span class="text-orange-300">1</span>),
+  enrolled <span class="text-purple-400">DATE</span>
+);</pre>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl">
+                        <div class="px-6 py-4">
+                            <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-slate-500 italic">-- See table structure</span>
+<span class="text-blue-400 font-semibold">DESCRIBE</span> <span class="text-cyan-300">students</span>;
+
+<span class="text-slate-500 italic">-- Add a new column</span>
+<span class="text-blue-400 font-semibold">ALTER TABLE</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">ADD COLUMN</span> phone <span class="text-purple-400">VARCHAR</span>(<span class="text-orange-300">20</span>);
+
+<span class="text-slate-500 italic">-- Remove a column</span>
+<span class="text-blue-400 font-semibold">ALTER TABLE</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">DROP COLUMN</span> phone;
+
+<span class="text-slate-500 italic">-- Delete all rows but keep table</span>
+<span class="text-blue-400 font-semibold">TRUNCATE TABLE</span> <span class="text-cyan-300">students</span>;
+
+<span class="text-slate-500 italic">-- Delete the whole table</span>
+<span class="text-blue-400 font-semibold">DROP TABLE</span> <span class="text-cyan-300">students</span>;</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Types Section -->
+                <div id="datatypes" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">Data Types</h2>
+                        <p class="text-slate-500 text-lg">Choose the right type for each column</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="ti ti-hash text-indigo-600"></i>
+                                <h3 class="font-bold">Numbers</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">INT</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">BIGINT</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">FLOAT</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">DECIMAL</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Use <code class="font-mono text-xs bg-slate-100 px-1 rounded">DECIMAL</code> for money. Use <code class="font-mono text-xs bg-slate-100 px-1 rounded">INT</code> for IDs.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="ti ti-text text-indigo-600"></i>
+                                <h3 class="font-bold">Text</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">CHAR</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">VARCHAR</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">TEXT</span>
+                            </div>
+                            <p class="text-sm text-slate-600"><code class="font-mono text-xs bg-slate-100 px-1 rounded">CHAR</code> is fixed length, <code class="font-mono text-xs bg-slate-100 px-1 rounded">VARCHAR</code> is variable.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="ti ti-calendar text-indigo-600"></i>
+                                <h3 class="font-bold">Date & Time</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">DATE</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">DATETIME</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">TIMESTAMP</span>
+                            </div>
+                            <p class="text-sm text-slate-600"><code class="font-mono text-xs bg-slate-100 px-1 rounded">TIMESTAMP</code> auto-updates. Format: YYYY-MM-DD</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="ti ti-settings text-indigo-600"></i>
+                                <h3 class="font-bold">Other</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">BOOLEAN</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">ENUM</span>
+                                <span class="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs font-mono rounded">JSON</span>
+                            </div>
+                            <p class="text-sm text-slate-600"><code class="font-mono text-xs bg-slate-100 px-1 rounded">ENUM</code> restricts values. <code class="font-mono text-xs bg-slate-100 px-1 rounded">JSON</code> stores structured data.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRUD Section -->
+                <div id="crud" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">CRUD Operations</h2>
+                        <p class="text-slate-500 text-lg">Create, Read, Update, Delete — the core of data manipulation</p>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                        <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-slate-500 italic">-- INSERT: Add rows</span>
+<span class="text-blue-400 font-semibold">INSERT INTO</span> <span class="text-cyan-300">students</span> (name, email, age) <span class="text-blue-400 font-semibold">VALUES</span>
+  (<span class="text-orange-300">'Alice'</span>, <span class="text-orange-300">'alice@mail.com'</span>, <span class="text-orange-300">20</span>),
+  (<span class="text-orange-300">'Bob'</span>, <span class="text-orange-300">'bob@mail.com'</span>, <span class="text-orange-300">22</span>);
+
+<span class="text-slate-500 italic">-- UPDATE: Modify rows</span>
+<span class="text-blue-400 font-semibold">UPDATE</span> <span class="text-cyan-300">students</span>
+<span class="text-blue-400 font-semibold">SET</span> age = <span class="text-orange-300">21</span>, grade = <span class="text-orange-300">'A'</span>
+<span class="text-blue-400 font-semibold">WHERE</span> name = <span class="text-orange-300">'Alice'</span>;
+
+<span class="text-slate-500 italic">-- DELETE: Remove rows</span>
+<span class="text-blue-400 font-semibold">DELETE FROM</span> <span class="text-cyan-300">students</span>
+<span class="text-blue-400 font-semibold">WHERE</span> age < <span class="text-orange-300">18</span>;
+
+<span class="text-red-400 font-bold italic">-- ⚠ Without WHERE, all rows are affected!</span></pre>
+                    </div>
+                    <div class="pt-4">
+                        <button class="px-6 py-2.5 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-all shadow-md hover:shadow-indigo-200 flex items-center gap-2" onclick="sendPrompt('Give me 5 MySQL CRUD practice questions with solutions')">
+                            Practice CRUD <i class="ti ti-arrow-up-right text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SELECT Section -->
+                <div id="select" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">SELECT & Filtering</h2>
+                        <p class="text-slate-500 text-lg">Retrieve exactly the data you need</p>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                        <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-blue-400 font-semibold">SELECT</span> name, age <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span>
+<span class="text-blue-400 font-semibold">WHERE</span> age >= <span class="text-orange-300">18</span>
+  <span class="text-blue-400 font-semibold">AND</span> grade = <span class="text-orange-300">'A'</span>
+<span class="text-blue-400 font-semibold">ORDER BY</span> name <span class="text-blue-400 font-semibold">ASC</span>
+<span class="text-blue-400 font-semibold">LIMIT</span> <span class="text-orange-300">10</span> <span class="text-blue-400 font-semibold">OFFSET</span> <span class="text-orange-300">0</span>;
+
+<span class="text-slate-500 italic">-- Pattern matching</span>
+<span class="text-blue-400 font-semibold">SELECT</span> * <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">WHERE</span> name <span class="text-blue-400 font-semibold">LIKE</span> <span class="text-orange-300">'A%'</span>;
+
+<span class="text-slate-500 italic">-- Match list of values</span>
+<span class="text-blue-400 font-semibold">SELECT</span> * <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">WHERE</span> grade <span class="text-blue-400 font-semibold">IN</span> (<span class="text-orange-300">'A'</span>, <span class="text-orange-300">'B'</span>);
+
+<span class="text-slate-500 italic">-- Range</span>
+<span class="text-blue-400 font-semibold">SELECT</span> * <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">WHERE</span> age <span class="text-blue-400 font-semibold">BETWEEN</span> <span class="text-orange-300">18</span> <span class="text-blue-400 font-semibold">AND</span> <span class="text-orange-300">25</span>;
+
+<span class="text-slate-500 italic">-- Check for NULL</span>
+<span class="text-blue-400 font-semibold">SELECT</span> * <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">WHERE</span> email <span class="text-blue-400 font-semibold">IS NULL</span>;</pre>
+                    </div>
+                </div>
+
+                <!-- Joins Section -->
+                <div id="joins" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">JOINs</h2>
+                        <p class="text-slate-500 text-lg">Combine data from multiple tables</p>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold text-indigo-600 mb-2">INNER JOIN</h3>
+                            <p class="text-sm text-slate-600">Only matching rows in both tables.</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold text-indigo-600 mb-2">LEFT JOIN</h3>
+                            <p class="text-sm text-slate-600">All from left + matches from right (NULL if no match).</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold text-indigo-600 mb-2">RIGHT JOIN</h3>
+                            <p class="text-sm text-slate-600">All from right + matches from left.</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold text-indigo-600 mb-2">CROSS JOIN</h3>
+                            <p class="text-sm text-slate-600">Every combination (cartesian product).</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                        <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-slate-500 italic">-- INNER JOIN example</span>
+<span class="text-blue-400 font-semibold">SELECT</span> s.name, c.course_name
+<span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> s
+<span class="text-blue-400 font-semibold">INNER JOIN</span> <span class="text-cyan-300">enrollments</span> e <span class="text-blue-400 font-semibold">ON</span> s.id = e.student_id
+<span class="text-blue-400 font-semibold">INNER JOIN</span> <span class="text-cyan-300">courses</span> c <span class="text-blue-400 font-semibold">ON</span> e.course_id = c.id;
+
+<span class="text-slate-500 italic">-- LEFT JOIN: include students with no courses</span>
+<span class="text-blue-400 font-semibold">SELECT</span> s.name, c.course_name
+<span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> s
+<span class="text-blue-400 font-semibold">LEFT JOIN</span> <span class="text-cyan-300">enrollments</span> e <span class="text-blue-400 font-semibold">ON</span> s.id = e.student_id
+<span class="text-blue-400 font-semibold">LEFT JOIN</span> <span class="text-cyan-300">courses</span> c <span class="text-blue-400 font-semibold">ON</span> e.course_id = c.id;</pre>
+                    </div>
+                    <div class="pt-4">
+                        <button class="px-6 py-2.5 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-all shadow-md hover:shadow-indigo-200 flex items-center gap-2" onclick="sendPrompt('Explain MySQL JOINs with a visual diagram and practice questions')">
+                            Visualize JOINs <i class="ti ti-arrow-up-right text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Aggregate Section -->
+                <div id="aggregate" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">Aggregate Functions</h2>
+                        <p class="text-slate-500 text-lg">Summarise and group data</p>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                        <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-slate-500 italic">-- COUNT, SUM, AVG, MIN, MAX</span>
+<span class="text-blue-400 font-semibold">SELECT</span>
+  <span class="text-purple-400">COUNT</span>(*) <span class="text-blue-400 font-semibold">AS</span> total,
+  <span class="text-purple-400">AVG</span>(age) <span class="text-blue-400 font-semibold">AS</span> avg_age,
+  <span class="text-purple-400">MAX</span>(age) <span class="text-blue-400 font-semibold">AS</span> oldest,
+  <span class="text-purple-400">MIN</span>(age) <span class="text-blue-400 font-semibold">AS</span> youngest
+<span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span>;
+
+<span class="text-slate-500 italic">-- GROUP BY: aggregate per group</span>
+<span class="text-blue-400 font-semibold">SELECT</span> grade, <span class="text-purple-400">COUNT</span>(*) <span class="text-blue-400 font-semibold">AS</span> count
+<span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span>
+<span class="text-blue-400 font-semibold">GROUP BY</span> grade
+<span class="text-blue-400 font-semibold">HAVING</span> <span class="text-purple-400">COUNT</span>(*) > <span class="text-orange-300">5</span> <span class="text-slate-500 italic">-- filter on group result</span>
+<span class="text-blue-400 font-semibold">ORDER BY</span> count <span class="text-blue-400 font-semibold">DESC</span>;</pre>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <i class="ti ti-info-circle text-indigo-600 text-xl mt-1"></i>
+                        <div>
+                            <h3 class="font-bold mb-1">WHERE vs HAVING</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                <code class="bg-slate-100 px-1 rounded text-indigo-600 font-mono">WHERE</code> filters rows <b class="text-slate-800">before</strong> grouping.
+                                <code class="bg-slate-100 px-1 rounded text-indigo-600 font-mono">HAVING</code> filters <b class="text-slate-800">after</strong> grouping.
+                                Use HAVING to filter on aggregate results like COUNT or SUM.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indexes Section -->
+                <div id="indexes" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">Indexes</h2>
+                        <p class="text-slate-500 text-lg">Speed up queries dramatically</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="ti ti-bolt text-indigo-600"></i>
+                            <h3 class="font-bold">Why indexes?</h3>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">Without an index, MySQL scans every row (full table scan). With an index, it jumps directly to matching rows — like a book's index. <span class="text-amber-600 font-medium">Trade-off: faster reads, slightly slower writes.</span></p>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                        <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-slate-500 italic">-- Create an index</span>
+<span class="text-blue-400 font-semibold">CREATE INDEX</span> idx_name <span class="text-blue-400 font-semibold">ON</span> <span class="text-cyan-300">students</span>(name);
+
+<span class="text-slate-500 italic">-- Unique index (enforces uniqueness)</span>
+<span class="text-blue-400 font-semibold">CREATE UNIQUE INDEX</span> idx_email <span class="text-blue-400 font-semibold">ON</span> <span class="text-cyan-300">students</span>(email);
+
+<span class="text-slate-500 italic">-- Composite index (multiple columns)</span>
+<span class="text-blue-400 font-semibold">CREATE INDEX</span> idx_grade_age <span class="text-blue-400 font-semibold">ON</span> <span class="text-cyan-300">students</span>(grade, age);
+
+<span class="text-slate-500 italic">-- See indexes on a table</span>
+<span class="text-blue-400 font-semibold">SHOW INDEXES FROM</span> <span class="text-cyan-300">students</span>;
+
+<span class="text-slate-500 italic">-- Check query performance</span>
+<span class="text-blue-400 font-semibold">EXPLAIN SELECT</span> * <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">WHERE</span> name = <span class="text-orange-300">'Alice'</span>;</pre>
+                    </div>
+                </div>
+
+                <!-- Constraints Section -->
+                <div id="constraints" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">Constraints</h2>
+                        <p class="text-slate-500 text-lg">Enforce data rules at the database level</p>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                        <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-blue-400 font-semibold">CREATE TABLE</span> <span class="text-cyan-300">orders</span> (
+  id            <span class="text-purple-400">INT</span> <span class="text-blue-400 font-semibold">AUTO_INCREMENT PRIMARY KEY</span>,
+  student_id    <span class="text-purple-400">INT</span> <span class="text-blue-400 font-semibold">NOT NULL</span>,
+  amount        <span class="text-purple-400">DECIMAL</span>(<span class="text-orange-300">10,2</span>) <span class="text-blue-400 font-semibold">CHECK</span> (amount > <span class="text-orange-300">0</span>),
+  status        <span class="text-purple-400">ENUM</span>(<span class="text-orange-300">'pending','paid','cancelled'</span>) <span class="text-blue-400 font-semibold">DEFAULT</span> <span class="text-orange-300">'pending'</span>,
+  created_at    <span class="text-purple-400">TIMESTAMP</span> <span class="text-blue-400 font-semibold">DEFAULT</span> <span class="text-purple-400">CURRENT_TIMESTAMP</span>,
+  <span class="text-blue-400 font-semibold">FOREIGN KEY</span> (student_id) <span class="text-blue-400 font-semibold">REFERENCES</span> <span class="text-cyan-300">students</span>(id)
+    <span class="text-blue-400 font-semibold">ON DELETE CASCADE</span>
+);</pre>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold mb-3">Key Constraints</h3>
+                            <ul class="space-y-2 text-sm text-slate-600">
+                                <li class="flex justify-between"><span class="font-medium">PRIMARY KEY</span> <code class="text-indigo-600 text-xs">Unique ID</code></li>
+                                <li class="flex justify-between"><span class="font-medium">FOREIGN KEY</span> <code class="text-indigo-600 text-xs">Link tables</code></li>
+                                <li class="flex justify-between"><span class="font-medium">UNIQUE</span> <code class="text-indigo-600 text-xs">No duplicates</code></li>
+                                <li class="flex justify-between"><span class="font-medium">NOT NULL</span> <code class="text-indigo- la600 text-xs">Required</code></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold mb-3">ON DELETE Actions</h3>
+                            <ul class="space-y-2 text-sm text-slate-600">
+                                <li class="flex justify-between"><span class="font-medium">CASCADE</span> <code class="text-indigo-600 text-xs">Delete child</code></li>
+                                <li class="flex justify-between"><span class="font-medium">SET NULL</span> <code class="text-indigo-600 text-xs">Nullify FK</code></li>
+                                <li class="flex justify-between"><span class="font-medium">RESTRICT</span> <code class="text-indigo-600 text-xs">Block delete</code></li>
+                                <li class="flex justify-between"><span class="font-medium">NO ACTION</span> <code class="text-indigo-600 text-xs">Restrict</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subquery Section -->
+                <div id="subquery" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">Subqueries</h2>
+                        <p class="text-slate-500 text-lg">Queries nested inside other queries</p>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                        <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-slate-500 italic">-- Subquery in WHERE</span>
+<span class="text-blue-400 font-semibold">SELECT</span> name <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span>
+<span class="text-blue-400 font-semibold">WHERE</span> age > (<span class="text-blue-400 font-semibold">SELECT</span> <span class="text-purple-400">AVG</span>(age) <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span>);
+
+<span class="text-slate-500 italic">-- Subquery in FROM (derived table)</span>
+<span class="text-blue-400 font-semibold">SELECT</span> g.grade, g.avg_age
+<span class="text-blue-400 font-semibold">FROM</span> (
+  <span class="text-blue-400 font-semibold">SELECT</span> grade, <span class="text-purple-400">AVG</span>(age) <span class="text-blue-400 font-semibold">AS</span> avg_age
+  <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span>
+  <span class="text-blue-400 font-semibold">GROUP BY</span> grade
+) <span class="text-blue-400 font-semibold">AS</span> g
+<span class="text-blue-400 font-semibold">WHERE</span> g.avg_age > <span class="text-orange-300">20</span>;
+
+<span class="text-slate-500 italic">-- EXISTS: check if subquery returns rows</span>
+<span class="text-blue-400 font-semibold">SELECT</span> name <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> s
+<span class="text-blue-400 font-semibold">WHERE EXISTS</span> (
+  <span class="text-blue-400 font-semibold">SELECT</span> <span class="text-orange-300">1</span> <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">enrollments</span> e
+  <span class="text-blue-400 font-semibold">WHERE</span> e.student_id = s.id
+);</pre>
+                    </div>
+                </div>
+
+                <!-- Advanced Section -->
+                <div id="advanced" class="section space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold text-slate-900">Advanced Features</h2>
+                        <p class="text-slate-500 text-lg">Transactions, views, stored procedures & more</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                            <div class="flex items-center gap-2 mb-4 text-slate-400 text-xs font-mono uppercase tracking-wider">
+                                <i class="ti ti-refresh text-sm"></i> Transactions
+                            </div>
+                            <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-blue-400 font-semibold">START TRANSACTION</span>;
+  <span class="text-blue-400 font-semibold">UPDATE</span> <span class="text-cyan-300">accounts</span> <span class="text-blue-400 font-semibold">SET</span> balance = balance - <span class="text-orange-300">500</span> <span class="text-blue-400 font-semibold">WHERE</span> id = <span class="text-orange-300">1</span>;
+  <span class="text-blue-400 font-semibold">UPDATE</span> <span class="text-cyan-300">accounts</span> <span class="text-blue-400 font-semibold">SET</span> balance = balance + <span class="text-orange-300">500</span> <span class="text-blue-400 font-semibold">WHERE</span> id = <span class="text-orange-300">2</span>;
+<span class="text-blue-400 font-semibold">COMMIT</span>; <span class="text-slate-500 italic">-- or ROLLBACK to undo</span></pre>
+                        </div>
+                        <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                            <div class="flex items-center gap-2 mb-4 text-slate-400 text-xs font-mono uppercase tracking-wider">
+                                <i class="ti ti-eye text-sm"></i> Views
+                            </div>
+                            <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-blue-400 font-semibold">CREATE VIEW</span> <span class="text-cyan-300">top_students</span> <span class="text-blue-400 font-semibold">AS</span>
+  <span class="text-blue-400 font-semibold">SELECT</span> name, grade <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">WHERE</span> grade = <span class="text-orange-300">'A'</span>;
+<span class="text-blue-400 font-semibold">SELECT</span> * <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">top_students</span>;</pre>
+                        </div>
+                        <div class="bg-slate-900 rounded-xl overflow-hidden shadow-xl p-6">
+                            <div class="flex items-center gap-2 mb-4 text-slate-400 text-xs font-mono uppercase tracking-wider">
+                                <i class="ti ti-code text-sm"></i> Stored Procedure
+                            </div>
+                            <pre class="font-mono text-sm leading-relaxed text-slate-300"><span class="text-blue-400 font-semibold">DELIMITER</span> //
+<span class="text-blue-400 font-semibold">CREATE PROCEDURE</span> <span class="text-purple-400">GetStudentsByGrade</span>(IN g <span class="text-purple-400">CHAR</span>(<span class="text-orange-300">1</span>))
+<span class="text-blue-400 font-semibold">BEGIN</span>
+  <span class="text-blue-400 font-semibold">SELECT</span> * <span class="text-blue-400 font-semibold">FROM</span> <span class="text-cyan-300">students</span> <span class="text-blue-400 font-semibold">WHERE</span> grade = g;
+<span class="text-blue-400 font-semibold">END</span>//
+<span class="text-blue-400 font-semibold">DELIMITER</span> ;
+<span class="text-purple-400">CALL</span> <span class="text-purple-400">GetStudentsByGrade</span>(<span class="text-orange-300">'A'</span>);</pre>
+                        </div>
+                    </div>
+                    <div class="pt-4">
+                        <button class="px-6 py-2.5 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-all shadow-md hover:shadow-indigo-200 flex items-center gap-2" onclick="sendPrompt('Teach me MySQL triggers and window functions with examples')">
+                            Triggers & Window Functions <i class="ti ti-arrow-up-right text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function show(id, el) {
+            // Update sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(n => {
+                n.classList.remove('bg-indigo-50', 'text-indigo-600', 'border-l-4', 'border-indigo-600');
+                n.classList.add('text-slate-600');
+            });
+            el.classList.add('bg-indigo-50', 'text-indigo-600', 'border-l-4', 'border-indigo-600');
+            el.classList.remove('text-slate-600');
+        }
+
+        // Initialize first item
+        window.onload = () => {
+            const firstNav = document.querySelector('.nav-item');
+            if (firstNav) show('intro', firstNav);
+        }
+    </script>
+</body>
+</html>
